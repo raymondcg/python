@@ -1,0 +1,37 @@
+variables:
+  DOCKER_USERNAME: tbd
+  DOCKER_PASSWORD: tbd
+  DOCKER_URL: tbd
+  DOCKER_REPO: tbd
+
+# Release the image to the docker repository, and creates appropriate tags.
+release:
+  stage: release
+  image: docker:dind
+  tags:
+    - <tag TDB>
+  script:
+    - VERSION=`cat version.txt`
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" $DOCKER_URL --password-stdin
+    # Tag and push based on branch (master is latest)
+    - "docker tag $DOCKER_URL/$DOCKER_REPO/$CI_PROJECT_NAME:$VERSION $DOCKER_URL/$DOCKER_REPO/$CI_PROJECT_NAME:latest"
+    - "docker push $DOCKER_URL/$DOCKER_REPO/$CI_PROJECT_NAME:$latest"
+  only:
+    - master
+      
+# Release the image to the docker repository, and creates appropriate tags.
+release:
+  stage: release
+  image: docker:dind
+  tags:
+    - <tag TDB>
+  script:
+    - VERSION=`cat version.txt`
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" $DOCKER_URL --password-stdin
+    - "docker tag $DOCKER_URL/$DOCKER_REPO/$CI_PROJECT_NAME:$VERSION $DOCKER_URL/$DOCKER_REPO/$CI_PROJECT_NAME:$CI_COMMIT_TAG"
+    - "docker push $DOCKER_URL/$DOCKER_REPO/$CI_PROJECT_NAME:$CI_COMMIT_TAG"
+  only:
+    - tags
+    
+stages:
+  - release
