@@ -5,8 +5,8 @@ variables:
   DOCKER_REPO: tbd
 
 # Release the image to the docker repository, and creates appropriate tags.
-release:
-  stage: release
+release-latest:
+  stage: release-master
   image: docker:dind
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" $DOCKER_URL --password-stdin
@@ -17,8 +17,8 @@ release:
     - master
       
 # Release the image to the docker repository, and creates appropriate tags.
-release:
-  stage: release
+release-tag:
+  stage: release-tag
   image: docker:dind
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" $DOCKER_URL --password-stdin
@@ -28,4 +28,5 @@ release:
     - tags
     
 stages:
-  - release
+  - release-master
+  - release-tag
