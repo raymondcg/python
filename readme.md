@@ -10,7 +10,7 @@ TBD
 
 ```bash
 docker build -t pythonrunner .
-docker run -it --rm pythonrunner
+docker run -it --rm -v D:/workspace/python/scripts/:/scripts pythonrunner
 ```
 
 # Usage
