@@ -39,4 +39,10 @@ docker-compose pull
 docker-compose up
 ```
 
+* If you run into issues with the mounts you may have to clean up from previous runs
+
+```bash
+docker volume prune -f
+```
+
 * All of the scripts will run, in alphabetical order, and any output saved to /output in the script will show up in the local folder.
