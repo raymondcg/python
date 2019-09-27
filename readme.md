@@ -10,7 +10,7 @@ TBD
 
 ```bash
 docker build -t pythonrunner .
-docker run -it --rm -v D:/workspace/python/scripts/:/scripts pythonrunner
+docker run -it --rm -v D:/workspace/python/scripts/:/scripts:Z pythonrunner
 ```
 
 # Usage
@@ -25,9 +25,9 @@ services:
     container_name: pythonrunner
     image: pythonrunner
     volumes:
-      - c:/workspace/parser/scripts/:/scripts
-      - c:/workspace/parser/input/:/input
-      - c:/workspace/parser/output/:/output
+      - c:/workspace/parser/scripts/:/scripts:Z
+      - c:/workspace/parser/input/:/input:Z
+      - c:/workspace/parser/output/:/output:Z
 ```
 
 * Put any scripts, or input files into the specified folders. WARNING: the script cannot have any white space in the name or file path.
